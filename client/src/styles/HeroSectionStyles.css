@@ -1,0 +1,124 @@
+.hero-section {
+    background-color: #f0f4f8;
+    padding: 0;
+    margin-top: 70px;
+    height: 80vh;
+    width: 100%;
+}
+
+.hero-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.hero-text {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.hero-button-appointment {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    background-color: #406ddc;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.hero-button-appointment:hover {
+    background-color: #3862cc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.hero-live-image {
+    position: relative;
+    height: 100%;
+    width: 50%;
+}
+
+.hero-live-image-doctor {
+    position: absolute;
+    right: 2.5rem;
+    bottom: 0;
+    width: 30rem;
+    height: 34rem;
+    opacity: 0.9;
+    animation: fadeInDoc 2s;
+}
+
+.hero-live-image-background {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 0;
+    width: 36rem;
+    height: 40rem;
+    opacity: 0.80;
+    animation: fadeInBack 2s;
+}
+
+@keyframes fadeInDoc {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInBack {
+    0% {
+        opacity: 0;
+        transform: translateX(5px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateX(0);
+    }
+}
+
+.hero-background {
+    background: linear-gradient(-45deg, #3b29b8, #1056d8, #1359da);
+    background-size: 100% 100%;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
