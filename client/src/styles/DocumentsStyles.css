@@ -1,0 +1,348 @@
+.documents-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.documents-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.documents-tabs button {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.documents-tabs button:hover {
+    color: #2a5bd7;
+}
+
+.documents-tabs button.active {
+    color: #2a5bd7;
+    background: rgba(42, 91, 215, 0.2);
+}
+
+.documents-tabs img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.document-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.document-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    border-bottom: 1px solid #eee;
+    padding: 0 1rem;
+}
+
+.document-form-header h3 {
+    color: #2a5bd7;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.document-form-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-document-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
+    height: fit-content;
+}
+
+.edit-document-wrapper button {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.edit-document-wrapper img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.documents-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.documents-form-group label {
+    font-weight: 500;
+    color: #333;
+}
+
+.documents-form-group input {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.documents-form-group input:disabled {
+    padding: 0.5rem 0;
+    color: rgba(0, 0, 0, 0.7);
+    background: none;
+    border: none;
+}
+
+.documents-form-group .gender-select-placeholder {
+    padding: 0.5rem 0;
+    color: rgba(0, 0, 0, 0.7);
+    background: none;
+    border: none;
+}
+
+.gender-select {
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.gender-select:hover {
+    border: none;
+}
+
+.documents-form-group input:focus {
+    outline: none;
+    border-color: #2a5bd7;
+    box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
+}
+
+.row-groups-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+}
+
+.row-form-group {
+    flex: 0.5;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.file-upload-label {
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.upload-documents-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px dashed rgba(42, 91, 215, 0.2);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: #2a5bd7;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s;
+    width: fit-content;
+}
+
+.upload-documents-btn:hover {
+    background: rgba(42, 91, 215, 0.2);
+    border: 2px dashed rgba(42, 91, 215, 0.9)
+}
+
+.upload-documents-btn img {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.files-info {
+    margin-top: 10px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: #f8fafc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.file-item a {
+    color: #3182ce;
+    text-decoration: none;
+}
+
+.file-item a:hover {
+    text-decoration: underline;
+}
+
+.delete-file-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 10px;
+}
+
+.delete-file-btn img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.delete-file-btn:hover img {
+    opacity: 1;
+}
+
+.file-upload-note {
+    font-size: 12px;
+    color: #718096;
+    margin-top: 5px;
+}
+
+.save-documents-btn {
+    width: 100%;
+    padding: 0.75rem 0.25rem;
+    background-color: #2a5bd7;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 0.6;
+    transition: background-color 0.3s;
+}
+
+@media (max-width: 768px) {
+    .documents-tabs {
+        flex-direction: column;
+    }
+
+    .documents-tabs button {
+        justify-content: center;
+    }
+}
+
+/*Preview Styles*/
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding: 0 1rem;
+}
+
+.preview-header h3 {
+    color: #2a5bd7;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.edit-preview-btn {
+    background: #f0f4f8;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #2a5bd7;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.edit-preview-btn:hover {
+    background: #e0e8f0;
+}
+
+.preview-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgba(42, 91, 215, 0.1);
+    border: 1px solid #2a5bd7;
+    border-radius: 1rem;
+    padding: 2rem 2rem 2rem 3rem;
+    margin-bottom: 1rem;
+}
+
+.preview-info-section {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+}
+
+.preview-img-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    flex: 0.5;
+}
+
+.preview-img-section img {
+    width: 25rem;
+    height: 25rem;
+    opacity: 0.15;
+}
+
+.preview-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-row {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.passport-series-number-preview {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2a5bd7;
+    margin-bottom: 1.5rem;
+}
+
+.preview-label {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.preview-value {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+}
+
+.preview-files {
+    padding-left: 2rem;
+}

@@ -1,0 +1,80 @@
+/* Стили для кастомного селекта */
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.custom-select-header:hover {
+    border-color: #9ca3af;
+}
+
+.custom-select.open .custom-select-header {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.custom-select-current {
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-select-arrow {
+    transition: transform 0.2s;
+    margin-left: 8px;
+}
+
+.custom-select.open .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    margin-top: 4px;
+    padding: 4px 0;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom-select-option {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.custom-select-option:hover {
+    background-color: rgba(42, 91, 215, 0.1);
+}
+
+.custom-select-option.selected {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+}
+
+/* Для пола в формах документов */
+.documents-form-group .custom-select {
+    margin-top: 4px;
+}

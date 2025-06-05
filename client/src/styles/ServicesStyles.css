@@ -1,0 +1,257 @@
+.services-container {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.services-header h2 {
+    color: #2a5bd7;
+    margin: 0 0 1.5rem 0;
+}
+
+.services-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex: 0.5
+}
+
+.services-search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    max-width: 400px;
+}
+
+.search-services-btn {
+    display: flex;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    margin: 0 0.5rem;
+    outline: none;
+    background: rgba(30, 75, 187, 0.1);
+    transition: background-color 0.35s;
+}
+
+.search-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.search-services-btn:hover {
+    background: rgba(64, 128, 202, 0.25);
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.8rem 0 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2a5bd7;
+    box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
+}
+
+.category-filter {
+    min-width: 200px;
+}
+
+.category-select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.category-select:focus {
+    outline: none;
+    border-color: #2a5bd7;
+}
+
+.services-tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(42, 91, 215, 0.2);
+}
+
+.services-tabs button {
+    flex: 0.1;
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s;
+    color: #222222;
+}
+
+.services-tabs button:hover {
+    color: #2a5bd7;
+}
+
+.services-tabs button.active {
+    color: #2a5bd7;
+    background: rgba(42, 91, 215, 0.2);
+    border-radius: 1rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 30vw;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-main-info {
+    flex: 1;
+}
+
+.service-main-info h3 {
+    color: #2a5bd7;
+    margin: 0 0 0.5rem 0;
+}
+
+.service-description {
+    color: #555;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+}
+
+.service-meta {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+}
+
+.meta-icon {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.7;
+}
+
+.paid {
+    color: #2a5bd7;
+}
+
+.free {
+    color: #2e7d32;
+}
+
+.service-actions {
+    margin-left: 1rem;
+}
+
+.book-btn {
+    background: #2a5bd7;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
+}
+
+.book-btn:hover {
+    background: #1e4bbb;
+}
+
+.no-results {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.no-results p {
+    margin-bottom: 1rem;
+}
+
+.reset-filters-btn {
+    background: #f5f5f5;
+    color: #2a5bd7;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.reset-filters-btn:hover {
+    background: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-container {
+        max-width: none;
+    }
+
+    .service-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .service-actions {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .book-btn {
+        width: 100%;
+    }
+}

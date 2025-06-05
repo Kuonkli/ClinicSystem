@@ -1,0 +1,193 @@
+.alert-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: fixed;
+    top: 20px;
+    right: 35%;
+    z-index: 10000;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 1rem;
+    min-width: 500px;
+    animation: alertFadeIn 0.3s ease, alertFadeOut 0.3s ease 3s;
+}
+
+.alert-container img {
+    width: 2rem;
+    transform: translateY(-0.1rem);
+}
+
+.alert-success {
+    border: 2px solid #68fa6e;
+    background: rgba(3, 200, 3, 0.5);
+}
+
+.alert-error {
+    border: 2px solid #f44336;
+    background: rgba(200, 0, 0, 0.6);
+}
+
+.alert-default {
+    border: 2px solid #607d8b;
+}
+
+.alert-message {
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Анимации */
+@keyframes alertFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes alertFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+
+/* Dialog Container */
+.dialog-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    bottom: 20px;
+    border: 2px solid #8D38FF;
+    right: 1%;
+    z-index: 10000;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    min-width: 400px;
+    animation: dialogFadeIn 0.3s ease;
+}
+
+/* Dialog Content */
+.dialog-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dialog-message {
+    margin: 0;
+    flex: 1;
+    text-align: left;
+}
+
+.dialog-container img {
+    width: 2rem;
+    transform: translateY(-0.2rem)
+}
+
+/* Dialog Actions */
+.dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.dialog-confirm,
+.dialog-cancel {
+    padding: 0.65rem 1.35rem;
+    border-radius: 2rem;
+    border: 1px solid #8D38FF;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dialog-confirm {
+    background: rgba(141, 56, 255, 0.5);
+    color: white;
+}
+
+.dialog-cancel {
+    background: rgba(141, 56, 255, 0.2);
+    color: white;
+}
+
+/* Dialog Timer */
+.dialog-timer-container {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.dialog-timer-progress {
+    height: 100%;
+    border-radius: 2px;
+    transition: width linear;
+}
+
+/* Dialog Type Styles */
+.dialog-container.success {
+    border: 2px solid #4caf50;
+}
+
+.dialog-container.success .dialog-timer-progress {
+    background: #4caf50;
+}
+
+.dialog-container.error {
+    border: 2px solid #f44336;
+}
+
+.dialog-container.error .dialog-timer-progress {
+    background: #f44336;
+}
+
+.dialog-container.default {
+    border: 2px solid #8D38FF;
+}
+
+.dialog-container.default .dialog-timer-progress {
+    background: #607d8b;
+}
+
+@keyframes dialogFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
