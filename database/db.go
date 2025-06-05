@@ -39,6 +39,11 @@ func InitDB() error {
         END $$;
     `)
 
+	err = DB.Exec("CREATE EXTENSION IF NOT EXISTS pg_trgm").Error
+	if err != nil {
+		log.Fatal("Failed to create extension pg_trgm:", err)
+	}
+
 	err = DB.AutoMigrate(
 		&models.User{},
 		&models.Passport{},
@@ -52,5 +57,6 @@ func InitDB() error {
 		&models.MedicalRecordMedication{},
 		&models.Review{},
 	)
+
 	return err
 }
