@@ -6,6 +6,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -25,11 +26,13 @@ type LoginRequest struct {
 }
 
 type SignUpRequest struct {
-	Name     string `json:"name" binding:"required"`
-	LastName string `json:"last_name" binding:"required"`
-	Phone    string `json:"phone" binding:"required"`
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required"`
+	Name       string `json:"name" binding:"required"`
+	LastName   string `json:"last_name" binding:"required"`
+	Patronymic string `json:"patronymic" binding:"required"`
+	Phone      string `json:"phone" binding:"required"`
+	Email      string `json:"email" binding:"required,email"`
+	Password   string `json:"password" binding:"required"`
+	Role       string `json:"role"`
 }
 
 func SignUp(c *gin.Context) {
@@ -63,11 +66,13 @@ func SignUp(c *gin.Context) {
 	}
 
 	user := &models.User{
-		Name:     req.Name,
-		LastName: req.LastName,
-		Email:    req.Email,
-		Phone:    req.Phone,
-		Password: string(hashedPassword),
+		Name:       req.Name,
+		LastName:   req.LastName,
+		Patronymic: req.Patronymic,
+		Email:      req.Email,
+		Phone:      req.Phone,
+		Password:   string(hashedPassword),
+		Role:       req.Role,
 	}
 	if err := database.DB.Create(&user).Error; err != nil {
 		if strings.Contains(err.Error(), "(SQLSTATE 23505)") {
@@ -126,6 +131,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid password or email"})
 		return
 	}
+	log.Println(user)
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid password or email"})
@@ -167,6 +173,13 @@ func Login(c *gin.Context) {
 	c.SetCookie("refresh_token", refreshTokenString, 86400, "/", "localhost", false, true)
 
 	c.JSON(http.StatusOK, gin.H{"message": "login successful"})
+}
+
+func LogOut(c *gin.Context) {
+	c.SetCookie("access_token", "", -1, "/", "localhost", false, true)
+	c.SetCookie("refresh_token", "", -1, "/", "localhost", false, true)
+
+	c.JSON(http.StatusOK, gin.H{"message": "logout successful"})
 }
 
 func RefreshToken(c *gin.Context) {
