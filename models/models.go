@@ -1,19 +1,22 @@
 package models
 
 import (
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 	"time"
 )
 
 type User struct {
 	gorm.Model
-	Name      string `gorm:"size:255;not null" json:"name"`
-	LastName  string `gorm:"size:255;not null" json:"last_name"`
-	Email     string `gorm:"uniqueIndex;size:255" json:"email"`
-	Phone     string `gorm:"uniqueIndex;size:20" json:"phone"`
-	Password  string `gorm:"not null" json:"password"`
-	Role      string `gorm:"type:user_role;not null;default:'patient'" json:"role"`
-	Confirmed bool   `gorm:"default:false" json:"confirmed"`
+	Name       string `gorm:"size:255;not null" json:"name"`
+	LastName   string `gorm:"size:255;not null" json:"last_name"`
+	Patronymic string `gorm:"size:255;not null" json:"patronymic"`
+	Email      string `gorm:"uniqueIndex;size:255" json:"email"`
+	Phone      string `gorm:"uniqueIndex;size:20" json:"phone"`
+	Password   string `gorm:"not null" json:"password"`
+	Role       string `gorm:"size:255;not null;check:role IN ('patient', 'doctor', 'register');default:'patient'" json:"role"`
+	Confirmed  bool   `gorm:"default:false" json:"confirmed"`
+	PhotoURL   string `json:"photo_url"`
 
 	Passport     *Passport
 	OMSPolicy    *OMSPolicy
@@ -28,6 +31,13 @@ type Passport struct {
 	Number     string    `gorm:"size:6;not null" json:"number"`
 	IssuedBy   string    `gorm:"not null" json:"issued_by"`
 	IssuedDate time.Time `gorm:"not null" json:"issued_date"`
+	UnitCode   string    `gorm:"size:10" json:"unit_code"`
+	FirstName  string    `gorm:"size:255;not null" json:"first_name"`
+	LastName   string    `gorm:"size:255;not null" json:"last_name"`
+	Patronymic string    `gorm:"size:255;not null" json:"patronymic"`
+	Gender     string    `gorm:"size:10;not null" json:"gender"`
+	BirthDate  time.Time `gorm:"not null" json:"birth_date"`
+	BirthPlace string    `gorm:"not null" json:"birth_place"`
 	ScanURL    string    `gorm:"not null" json:"scan_url"`
 	Verified   bool      `gorm:"default:false" json:"verified"`
 }
@@ -36,9 +46,13 @@ type OMSPolicy struct {
 	gorm.Model
 	UserID           uint      `gorm:"uniqueIndex;not null" json:"user_id"`
 	Number           string    `gorm:"size:16;uniqueIndex;not null" json:"number"`
+	FirstName        string    `gorm:"size:255;not null" json:"first_name"`
+	LastName         string    `gorm:"size:255;not null" json:"last_name"`
+	Patronymic       string    `gorm:"size:255;not null" json:"patronymic"`
+	Gender           string    `gorm:"size:10;not null" json:"gender"`
+	BirthDate        time.Time `gorm:"not null" json:"birth_date"`
 	InsuranceCompany string    `gorm:"not null" json:"insurance_company"`
-	IssuedDate       time.Time `json:"issued_date"`
-	ExpiryDate       time.Time `json:"expiry_date"`
+	InsuranceRegion  string    `gorm:"size:255;not null" json:"insurance_region"`
 	ScanURL          string    `gorm:"not null" json:"scan_url"`
 	Verified         bool      `gorm:"default:false" json:"verified"`
 }
@@ -47,24 +61,29 @@ type SNILS struct {
 	gorm.Model
 	UserID     uint      `gorm:"uniqueIndex;not null" json:"user_id"`
 	Number     string    `gorm:"size:14;uniqueIndex;not null" json:"number"`
-	IssuedDate time.Time `json:"issued_date" json:"issued_date"`
+	FirstName  string    `gorm:"size:255;not null" json:"first_name"`
+	LastName   string    `gorm:"size:255;not null" json:"last_name"`
+	Patronymic string    `gorm:"size:255;not null" json:"patronymic"`
+	Gender     string    `gorm:"size:10;not null" json:"gender"`
+	BirthDate  time.Time `gorm:"not null" json:"birth_date"`
 	ScanURL    string    `gorm:"not null" json:"scan_url"`
 	Verified   bool      `gorm:"default:false" json:"verified"`
 }
 
 type Doctor struct {
 	gorm.Model
-	UserID      uint    `gorm:"uniqueIndex;not null" json:"user_id"`
-	Specialty   string  `gorm:"not null" json:"specialty"`
-	Experience  int     `gorm:"not null" json:"experience"`
-	Cabinet     string  `gorm:"not null" json:"cabinet"`
-	Schedule    string  `gorm:"type:jsonb" json:"schedule"`
-	Description string  `json:"description"`
-	Rating      float64 `gorm:"type:numeric(3,1);default:0.0" json:"rating"`
-	PhotoURL    string  `json:"photo_url"`
+	UserID      uint           `gorm:"uniqueIndex;not null" json:"user_id"`
+	Specialty   string         `gorm:"not null" json:"specialty"`
+	Experience  int            `gorm:"not null" json:"experience"`
+	Cabinet     string         `gorm:"not null" json:"cabinet"`
+	Schedule    datatypes.JSON `gorm:"type:jsonb" json:"schedule"`
+	Description string         `json:"description"`
+	Rating      float64        `gorm:"type:numeric(3,1);default:0.0" json:"rating"`
 
+	User         *User `gorm:"foreignKey:UserID"`
 	Appointments []Appointment
 	Reviews      []Review
+	Services     []Service `gorm:"many2many:doctor_services"`
 }
 
 type Service struct {
@@ -74,6 +93,8 @@ type Service struct {
 	IsPaid      bool    `gorm:"default:false" json:"is_paid"`
 	Price       float64 `gorm:"type:numeric(10,2)" json:"price"`
 	Duration    int     `gorm:"not null" json:"duration"`
+
+	Doctors []Doctor `gorm:"many2many:doctor_services"`
 }
 
 type Appointment struct {
@@ -81,14 +102,18 @@ type Appointment struct {
 	UserID          uint      `gorm:"index;not null" json:"user_id"`
 	DoctorID        uint      `gorm:"index;not null" json:"doctor_id"`
 	ServiceID       uint      `gorm:"index;not null" json:"service_id"`
-	Status          string    `gorm:"type:varchar(20);default:'booked'" json:"status"`
+	Status          string    `gorm:"type:varchar(20);default:'waiting'" json:"status"`
 	AppointmentDate time.Time `gorm:"not null" json:"appointment_date"`
+	StartTime       string    `gorm:"not null" json:"start_time"`
+	EndTime         string    `gorm:"not null" json:"end_time"`
+	Reason          string    `gorm:"type:text" json:"reason"`
 	Notes           string    `json:"notes"`
+	TicketURL       string    `gorm:"type:text" json:"ticket_url"`
 
-	User          *User    `gorm:"foreignKey:UserID"`
-	Doctor        *Doctor  `gorm:"foreignKey:DoctorID"`
-	Service       *Service `gorm:"foreignKey:ServiceID"`
-	MedicalRecord *MedicalRecord
+	User          *User          `gorm:"foreignKey:UserID" json:"user"`
+	Doctor        *Doctor        `gorm:"foreignKey:DoctorID" json:"doctor"`
+	Service       *Service       `gorm:"foreignKey:ServiceID" json:"service"`
+	MedicalRecord *MedicalRecord `json:"medical_record"`
 }
 
 type MedicalRecord struct {
